@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;    
+    font-family: 'Lato', sans-serif;
+}
+
+.bg-round {
+    background-color: brown;
+}
+
+.score {
+    font-size: 7em;
+}
+
+.active {
+    background-color: green;
+}
+
+.activePlayer::after{
+    font-family: "Font Awesome 5 Free";
+    color: green;
+    content: "\f522";
+    display: inline-block;
+    padding-right: 3px;
+    vertical-align: middle;
+    font-weight: 900;
+    margin-left: 0.5em;
+}
