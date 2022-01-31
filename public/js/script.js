@@ -1,5 +1,4 @@
 // jeu de dé
-
 class Player{
   constructor(alias, name){
     this.name = name;     
@@ -55,7 +54,6 @@ class Player{
   setIsNotTurn(){
     this.turn = false;
     document.dispatchEvent(this.isNotTurnEvent);
-
   }
 
   initPlayer(){    
