@@ -214,7 +214,12 @@ function randomFirstPlayer(Game){
 
 const rollDiceButton = document.getElementById('rollDice');
 rollDiceButton.addEventListener('click', () => {
-  newGame.play();  
+  if(typeof newGame === 'undefined'){
+    console.log('pas de partie en cours...')
+  }
+  else{
+    newGame.play();  
+  }
 })
 
 const holdbutton = document.getElementById('hold');
