@@ -87,14 +87,19 @@ class Game{
   constructor(playerOne, playerTwo){
     this.playerOne = new Player('playerOne', playerOne);
     this.playerTwo = new Player('playerTwo', playerTwo);
-
-    this.winnerAlert = new CustomEvent('winnerEvent')
+    this.winnerAlert = new CustomEvent('winnerEvent');
+    this.startGameEvent = new CustomEvent('gameAlert', {
+      detail:{
+        name: 'start'
+      }
+    });    
   }
   
   // Start new Game
   newGame(){
     this.playerOne.initPlayer();
-    this.playerTwo.initPlayer();    
+    this.playerTwo.initPlayer();
+    document.dispatchEvent(this.startGameEvent);   
   }
   rollDice(bool = false){     // cheatMode = true
     if(bool === true){
@@ -182,6 +187,8 @@ document.addEventListener('scoreEvent', (event)=> {
 
 document.addEventListener('winnerEvent', () => {
   console.log(`le gagnant est ${newGame.player().name}`);
+  disableButtons([rollDiceButton, holdbutton]);
+  // -> Créer un message de félicitations
 })
 
 document.addEventListener('turnEvent', (event) => {  
