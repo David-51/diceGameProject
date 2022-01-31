@@ -218,14 +218,29 @@ rollDiceButton.addEventListener('click', () => {
 })
 
 const holdbutton = document.getElementById('hold');
-holdbutton.addEventListener('click', () => {
-  if(newGame.player().round > 0){    
-    newGame.hold();    
+holdbutton.addEventListener('click', () => {  
+  console.log(typeof newGame);
+  if(typeof newGame ==='undefined' || newGame.player().round <= 0){
+    console.log('rien a hold')
   }
   else{
-    // Afficher un message d'erreur
-    console.log('rien a hold')
+    newGame.hold();
   }
 })
 
+// Bloquez les fonctions autre que nouvelle partie
 
+// désactiver des boutons via Css
+function disableButtons(arrayElements){
+  arrayElements.forEach(element => {
+    element.setAttribute('disabled', true);
+  });
+}
+function activateButtons(arrayElements){
+  arrayElements.forEach(element => {
+    element.removeAttribute('disabled')
+  });
+}
+// disableButtons([rollDiceButton, holdbutton]);
+
+// Quand il y a un gagnant Félicitez / Proposez une nouvelle partie et bloquer les autres fonctions

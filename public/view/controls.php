@@ -2,7 +2,7 @@
 ob_start();
 ?>
 <div class="row col-12 d-flex justify-content-center my-1">    
-    <button id="newGame" class="btn btn-outline-success player fs-3 text-dark" data-bs-toggle="modal" data-bs-target="#formModal" type="button">
+    <button id="newGamebutton" class="btn btn-outline-success player fs-3 text-dark" data-bs-toggle="modal" data-bs-target="#formModal" type="button">
         <i class="fas fa-plus-circle"></i>&ensp;New Game
     </button>
     
