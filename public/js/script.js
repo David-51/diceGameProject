@@ -92,7 +92,7 @@ class Game{
       detail:{
         name: 'start'
       }
-    });    
+    });      
   }
   
   // Start new Game
@@ -152,7 +152,7 @@ class Game{
   }
   hold(){
     this.player().addRoundToGlobal();
-    if(this.player().global >= 100){
+    if(this.player().global >= 15){
       document.dispatchEvent(this.winnerAlert);
       return 
     }
@@ -190,6 +190,8 @@ document.addEventListener('winnerEvent', () => {
   console.log(`le gagnant est ${newGame.player().name}`);
   disableButtons([rollDiceButton, holdbutton]);
   // -> Créer un message de félicitations
+  delete newGame;
+  console.log('deleted ?' + typeof newGame)
 })
 
 document.addEventListener('turnEvent', (event) => {  
