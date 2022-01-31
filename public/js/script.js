@@ -170,7 +170,8 @@ const form = document.getElementById('newGameForm');
     formModal.toggle();
     document.getElementById('playerOneName').innerText = newGame.playerOne.name;
     document.getElementById('playerTwoName').innerText = newGame.playerTwo.name;
-    randomFirstPlayer(newGame);  
+    randomFirstPlayer(newGame);
+    activateButtons([rollDiceButton, holdbutton]);
   })  
 
 document.addEventListener('scoreEvent', (event)=> {

@@ -13,13 +13,13 @@ ob_start();
     </div>
 </div>
 <div class="row d-flex justify-content-center my-1">
-    <button id="rollDice" class="btn btn-outline-success text-dark fs-4" type="button">
+    <button id="rollDice" class="btn btn-outline-success text-dark fs-4" type="button" disabled>
         <i class="fas fa-sync-alt"></i>&ensp;Roll Dice
     </button>
     
 </div>
 <div class="row d-flex justify-content-center my-1">
-    <button class="btn btn-outline-success text-dark fs-4" type="button" id="hold">
+    <button class="btn btn-outline-success text-dark fs-4" type="button" id="hold" disabled>
         Hold
     </button>
 </div>
