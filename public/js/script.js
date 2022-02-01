@@ -161,6 +161,7 @@ class Game{
 }
 
 const formModal = new bootstrap.Modal(document.getElementById('formModal'));
+const winnerModal = new bootstrap.Modal(document.getElementById('winnerModal'));
 
 const form = document.getElementById('newGameForm');  
   form.addEventListener('submit', (event)=>{
@@ -190,6 +191,9 @@ document.addEventListener('winnerEvent', () => {
   console.log(`le gagnant est ${newGame.player().name}`);
   disableButtons([rollDiceButton, holdbutton]);
   // -> Créer un message de félicitations
+  document.getElementById('congratulation').innerText = `Félicitations ${newGame.player().name}, vous avez gagné !`;
+  winnerModal.show();
+  
   delete newGame;
   console.log('deleted ?' + typeof newGame)
 })
