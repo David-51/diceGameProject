@@ -1,5 +1,5 @@
 // jeu de dé
-import * as GAME from './moduleGame.js';
+import { Game } from './moduleGame.js';
 
 const formModal = new bootstrap.Modal(document.getElementById('formModal'));
 const winnerModal = new bootstrap.Modal(document.getElementById('winnerModal'));
@@ -7,7 +7,7 @@ const form = document.getElementById('newGameForm');
 const rollDiceButton = document.getElementById('rollDice');
 const holdbutton = document.getElementById('hold');
 
-let newGame = new GAME.Game();
+let newGame = new Game();
 
 // Create the Game and add Players name
 form.addEventListener('submit', (event)=>{
