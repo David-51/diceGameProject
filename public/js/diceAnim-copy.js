@@ -2,7 +2,7 @@ import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/thr
 
 class Dice{
     constructor(canvasElement){
-        this.rotation = {
+        this.targetRotation = {
             un: {
                 x: 2 * Math.PI,
                 z: Math.PI / 2 + 2 * Math.PI,
@@ -30,9 +30,14 @@ class Dice{
         }
         this.scene = new THREE.Scene();
         this.canvasElement = document.getElementById(canvasElement);
+        this.camera;
+        this.renderer;
+        this.dice;
+        this.target;
     }
+        
 
-    display(){
+    createDice(){
         this.camera = new THREE.PerspectiveCamera(80, this.canvasElement.clientWidth / this.canvasElement.clientHeight , 0.1, 1000);
         this.renderer = new THREE.WebGLRenderer({
             canvas: this.canvasElement
@@ -57,6 +62,8 @@ class Dice{
         this.camera.lookAt(0,0,0)
 
         this.scene.add(this.dice);
+    }
+    display(){
         window.addEventListener('load', ()=>{
             this.renderer.render(this.scene, this.camera);    
         })
@@ -70,27 +77,57 @@ class Dice{
             number: target+1
         }
     }
-    diceAnimation(){
+    
+    diceRotation(randomTarget, rotation){
+        let totalRotation = rotation * 2 * Math.PI;        
+        const target = {
+            x: eval('this.targetRotation.' + randomTarget.string + '.x'),
+            z: eval('this.targetRotation .' + randomTarget.string + '.z')
+        }
+        console.log(target);
+        console.log(randomTarget.string);
+
+        if((this.dice.rotation.x < target.x) || (this.dice.rotation.z < target.z)){
+            if(this.dice.rotation.x >= target.x){      
+                this.dice.rotation.x = target.x
+            }
+            else{
+                this.dice.rotation.x += 0.15;
+            }
+            if(this.dice.rotation.z >= target.z){
+                this.dice.rotation.z = target.z
+            }
+            else{
+                this.dice.rotation.z += 0.15
+            }
+        }
+        else{
+            return randomTarget.number;
+        }
+    }
+    play(){
         this.dice.rotation.x = 0;
         this.dice.rotation.z = 0;
         
-        let targetRotation = randomTarget();
-        console.log(targetRotation);
+        this.target = this.randomTarget();        
         
-        function animate(){        
-            const animationFrame = requestAnimationFrame(animate);                                        
-            const rotation = diceRotation(targetRotation, this.dice, 1, animationFrame);     
-        
-            if(rotation === false){
-                cancelAnimationFrame(animationFrame);            
-                return 'endAnim';
-            }
-            renderer.render(this.scene, camera);        
-        }
-        animate();
+        this.animate();
     }
-
+    
+    animate(){        
+        const animationFrame = requestAnimationFrame(this.animate.bind(this));                                        
+        const targetRotation = this.diceRotation(this.target, 1);          
+        
+        if(typeof targetRotation !== 'undefined'){
+            cancelAnimationFrame(animationFrame);            
+            console.log('number: ', this.target.number)
+            return this.target.number;
+        }
+        this.renderer.render(this.scene, this.camera);        
+    }
 
 }
 let test = new Dice('dice');
+test.createDice();
 test.display();
+test.play();
