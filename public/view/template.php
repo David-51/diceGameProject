@@ -22,9 +22,8 @@
         </div>
     </div>
     <?php require './public/view/formModal.php'; ?>
-    <?php require './public/view/winnerModal.php'; ?>
-    <script type="module" src="./public/js/diceAnim.js"></script>
+    <?php require './public/view/winnerModal.php'; ?>    
     <script src="./public/js/bootstrap.min.js"></script>
-    <script src="./public/js/script.js"></script>
+    <script type="module" src="./public/js/script.js"></script>
 </body>
 </html>

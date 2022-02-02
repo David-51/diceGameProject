@@ -1,123 +1,138 @@
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.min.js';
 
-const scene = new THREE.Scene();
-const canvasElement = document.getElementById('dice');
+export class Dice{
+    constructor(canvasElement){
+        this.targetRotation = {
+            un: {
+                x: 2 * Math.PI,
+                z: Math.PI / 2 + 2 * Math.PI,
+            },    
+            deux: { // Position de repos
+                x: 2 * Math.PI,
+                z: 2 * Math.PI,
+            },
+            trois: {
+                x: 3 * Math.PI / 2,
+                z: 2 * Math.PI,
+            },
+            quatre: {
+                x: Math.PI / 2 + 2 * Math.PI,
+                z: 2 * Math.PI,
+            },
+            cinq: {
+                x: Math.PI + 2 * Math.PI,
+                z: 2 * Math.PI,
+            },
+            six: {
+                x: 2 * Math.PI,
+                z: 3 * Math.PI / 2
+            }
+        }
+        this.scene = new THREE.Scene();
+        this.canvasElement = document.getElementById(canvasElement);
+        this.camera;
+        this.renderer;
+        this.dice;
+        this.target;
+        this.endAnimationEvent = new CustomEvent('endAnimation', {
+            detail: {                            
+              name: 'endAnimation',              
+            }
+        })        
+    }
+        
 
-const camera = new THREE.PerspectiveCamera(80, canvasElement.clientWidth / canvasElement.clientHeight , 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({
-    canvas: canvasElement
-});
+    createDice(){
+        this.camera = new THREE.PerspectiveCamera(80, this.canvasElement.clientWidth / this.canvasElement.clientHeight , 0.1, 1000);
+        this.renderer = new THREE.WebGLRenderer({
+            canvas: this.canvasElement
+        });
 
-renderer.setClearColor(0x0e004b);
+        this.renderer.setClearColor(0x0e004b);
 
-const diceGeometry = new THREE.BoxGeometry(5,5,5);
+        const diceGeometry = new THREE.BoxGeometry(5,5,5);
 
-const materials = [
-    new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('public/images/face1.png')}), // RIGHT side
-    new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('public/images/face6.png')}), // LEFT side
-    new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('public/images/face2.png')}), // TOP side
-    new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('public/images/face5.png')}), // BOTTOM side
-    new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('public/images/face3.png')}), // FRONT Side
-    new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('public/images/face4.png')}), // BACK side
-]
+        const materials = [
+            new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('public/images/face1.png')}), // RIGHT side
+            new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('public/images/face6.png')}), // LEFT side
+            new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('public/images/face2.png')}), // TOP side
+            new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('public/images/face5.png')}), // BOTTOM side
+            new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('public/images/face3.png')}), // FRONT Side
+            new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('public/images/face4.png')}), // BACK side
+        ]
 
-const dice = new THREE.Mesh(diceGeometry, materials);
+        this.dice = new THREE.Mesh(diceGeometry, materials);
 
-camera.position.set(3,7,5)
-camera.lookAt(0,0,0)
+        this.camera.position.set(3,7,5)
+        this.camera.lookAt(0,0,0)
 
-scene.add(dice);
-window.addEventListener('load', ()=>{
-    renderer.render(scene, camera);    
-})
-/**
- * 
- * @param {string} diceNumber 
- * @param {MeshObject} dice 
- * @param {int} rotation 
- */
+        this.scene.add(this.dice);
+    }
+    display(){
+        window.addEventListener('load', ()=>{
+            this.renderer.render(this.scene, this.camera);    
+        })
+    }
 
-function diceRotation(diceNumber, dice, rotation){
-    
-    // rotation necessary to get the dice up to the target number
-    const number = {
-        un: {
-            x: 2 * Math.PI,
-            z: Math.PI / 2 + 2 * Math.PI,
-        },    
-        deux: { // Position de repos
-            x: 2 * Math.PI,
-            z: 2 * Math.PI,
-        },
-        trois: {
-            x: 3 * Math.PI / 2,
-            z: 2 * Math.PI,
-        },
-        quatre: {
-            x: Math.PI / 2 + 2 * Math.PI,
-            z: 2 * Math.PI,
-        },
-        cinq: {
-            x: Math.PI + 2 * Math.PI,
-            z: 2 * Math.PI,
-        },
-        six: {
-            x: 2 * Math.PI,
-            z: 3 * Math.PI / 2
+    randomTarget(){
+        const stringTarget = ['un', 'deux', 'trois', 'quatre', 'cinq', 'six'];
+        let target = Math.floor(Math.random()*6);
+        return {
+            string: stringTarget[target],
+            number: target+1
         }
     }
-    rotation = rotation * 2 * Math.PI;
-    let diceTarget = {
-        x: eval('number.' + diceNumber + '.x') + rotation,
-        z: eval('number.' + diceNumber + '.z') + rotation
-    }
-    if((dice.rotation.x < diceTarget.x) || (dice.rotation.z < diceTarget.z)){
-        if(dice.rotation.x >= diceTarget.x){      
-            dice.rotation.x = diceTarget.x
+    
+    diceRotation(randomTarget, rotation){
+        let totalRotation = rotation * 2 * Math.PI;        
+        const target = {
+            x: eval('this.targetRotation.' + randomTarget.string + '.x') + totalRotation,
+            z: eval('this.targetRotation .' + randomTarget.string + '.z') + totalRotation
+        }        
+
+        if((this.dice.rotation.x < target.x) || (this.dice.rotation.z < target.z)){
+            if(this.dice.rotation.x >= target.x){      
+                this.dice.rotation.x = target.x
+            }
+            else{
+                this.dice.rotation.x += 0.15;
+            }
+            if(this.dice.rotation.z >= target.z){
+                this.dice.rotation.z = target.z
+            }
+            else{
+                this.dice.rotation.z += 0.15
+            }
+            return 0;
         }
         else{
-            dice.rotation.x += 0.15;
-        }
-        if(dice.rotation.z >= diceTarget.z){
-            dice.rotation.z = diceTarget.z
-        }
-        else{
-            dice.rotation.z += 0.15
+            return randomTarget.number;
         }
     }
-    else{
-    return false;
+    play(){
+        // return new Promise(resolve  => {
+            this.dice.rotation.x = 0;
+            this.dice.rotation.z = 0;
+            this.target = this.randomTarget(); 
+            // resolve(this.createAnimation());  
+            this.createAnimation();                                     
+            // return new Promise(resolve => this.createAnimation)
+        // })                  
+    }
+
+    createAnimation(){                            
+            this.animationFrame = requestAnimationFrame(this.createAnimation.bind(this));                                                                
+            const targetRotation = this.diceRotation(this.target, 1);          
+            this.renderer.render(this.scene, this.camera);                        
+            
+            if(targetRotation === this.target.number){                     
+                console.log('dans le if : ' + targetRotation)            
+                cancelAnimationFrame(this.animationFrame); 
+                this.endAnimation();                                                                 
+            }                                                                                
+    }
+    endAnimation(){        
+        this.endAnimationEvent.detail.target = this.target.number;
+        document.dispatchEvent(this.endAnimationEvent);
     }
 }
-
-// random target
-function randomTarget(){
-    const stringTarget = ['un', 'deux', 'trois', 'quatre', 'cinq', 'six'];
-    let target = Math.floor(Math.random()*6);
-    return stringTarget[target];
-}
-
-function diceAnimation(){
-    dice.rotation.x = 0;
-    dice.rotation.z = 0;
-    
-    let targetRotation = randomTarget();
-    console.log(targetRotation);
-    
-    function animate(){        
-        const animationFrame = requestAnimationFrame(animate);                                        
-        const rotation = diceRotation(targetRotation, dice, 1, animationFrame);     
-    
-        if(rotation === false){
-            cancelAnimationFrame(animationFrame);            
-            return 'endAnim';
-        }
-        renderer.render(scene, camera);        
-    }
-    animate();
-}
-
-
-document.getElementsByTagName('body')[0].addEventListener('click', ()=>{
-    diceAnimation();
-})

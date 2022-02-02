@@ -1,4 +1,6 @@
 // jeu de dé
+import * as DICE from './diceAnim.js';
+
 class Player{
   constructor(alias, name){
     this.name = name;     
@@ -109,15 +111,13 @@ class Game{
     return this.dice;
   }
 
-  play(){ 
-    let dice = this.rollDice();
-    if(dice === 1){
-      console.log(dice);
+  play(diceRoll){        
+    if(diceRoll === 1){      
       this.switchPlayer();
     }
     else{
-      console.log(dice);
-      this.player().addToRound(dice);
+      console.log(diceRoll);
+      this.player().addToRound(diceRoll);
     }
   }
   // Display Winner
@@ -162,18 +162,23 @@ class Game{
 
 const formModal = new bootstrap.Modal(document.getElementById('formModal'));
 const winnerModal = new bootstrap.Modal(document.getElementById('winnerModal'));
-
 const form = document.getElementById('newGameForm');  
-  form.addEventListener('submit', (event)=>{
-    event.preventDefault();            
-    newGame = new Game(form.playerOneInput.value, form.playerTwoInput.value);    
-    newGame.newGame();
-    formModal.toggle();
-    document.getElementById('playerOneName').innerText = newGame.playerOne.name;
-    document.getElementById('playerTwoName').innerText = newGame.playerTwo.name;
-    randomFirstPlayer(newGame);
-    activateButtons([rollDiceButton, holdbutton]);
-  })  
+
+const dice = new DICE.Dice('dice');
+dice.createDice();
+dice.display();
+let newGame;
+
+form.addEventListener('submit', (event)=>{
+  event.preventDefault();            
+  newGame = new Game(form.playerOneInput.value, form.playerTwoInput.value);    
+  newGame.newGame();
+  formModal.toggle();
+  document.getElementById('playerOneName').innerText = newGame.playerOne.name;
+  document.getElementById('playerTwoName').innerText = newGame.playerTwo.name;
+  randomFirstPlayer(newGame);
+  activateButtons([rollDiceButton, holdbutton]);
+})  
 
 document.addEventListener('scoreEvent', (event)=> {
   const alias = event.detail.alias;
@@ -190,16 +195,22 @@ document.addEventListener('scoreEvent', (event)=> {
 document.addEventListener('winnerEvent', () => {
   console.log(`le gagnant est ${newGame.player().name}`);
   disableButtons([rollDiceButton, holdbutton]);
-  // -> Créer un message de félicitations
+  
   document.getElementById('congratulation').innerText = `Félicitations ${newGame.player().name}, vous avez gagné !`;
   winnerModal.show();
-  
-  delete newGame;
+  if(typeof newGame !== 'undefined' || newGame === null){
+    newGame = null; // à surveiller
+  }
   console.log('deleted ?' + typeof newGame)
 })
 
 document.addEventListener('turnEvent', (event) => {  
   displayActivePlayer(event);
+})
+
+document.addEventListener('endAnimation', (event) => {
+  console.log('event : ' + event.detail.target)
+  newGame.play(event.detail.target);
 })
 
 function displayActivePlayer(event){
@@ -232,7 +243,7 @@ rollDiceButton.addEventListener('click', () => {
     console.log('pas de partie en cours...')
   }
   else{
-    newGame.play();  
+    dice.play();    
   }
 })
 
@@ -247,8 +258,7 @@ holdbutton.addEventListener('click', () => {
   }
 })
 
-// Bloquez les fonctions autre que nouvelle partie
-
+// Bloquer les boutons
 // désactiver des boutons via Css
 function disableButtons(arrayElements){
   arrayElements.forEach(element => {
@@ -262,4 +272,5 @@ function activateButtons(arrayElements){
 }
 // disableButtons([rollDiceButton, holdbutton]);
 
-// Quand il y a un gagnant Félicitez / Proposez une nouvelle partie et bloquer les autres fonctions
+// essai de promises ----------------------------------------
+
