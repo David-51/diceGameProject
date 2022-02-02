@@ -1,5 +1,6 @@
 import { Dice } from './moduleDice.js';
-import * as PLAYER from './modulePlayer.js';
+// import * as PLAYER from './modulePlayer.js';
+import { Player } from './modulePlayer.js';
 
 export class Game{
     constructor(){        
@@ -15,10 +16,10 @@ export class Game{
         this.dice.display();
     }
     setPlayerOne(name){
-        this.playerOne = new PLAYER.Player('playerOne', name);        
+        this.playerOne = new Player('playerOne', name);        
     }
     setPlayerTwo(name){
-        this.playerTwo = new PLAYER.Player('playerTwo', name);        
+        this.playerTwo = new Player('playerTwo', name);        
     }
 
     // Start new Game
