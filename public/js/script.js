@@ -9,6 +9,7 @@ const holdbutton = document.getElementById('hold');
 
 let newGame = new GAME.Game();
 
+// Create the Game and add Players name
 form.addEventListener('submit', (event)=>{
   event.preventDefault();  
   newGame.setPlayerOne(form.playerOneInput.value);
@@ -23,18 +24,18 @@ form.addEventListener('submit', (event)=>{
   activateButtons([rollDiceButton, holdbutton]);
 })  
 
+// Update scores
 document.addEventListener('scoreEvent', (event)=> {
   const alias = event.detail.alias;
   const updateScore = event.detail.name;
   const divToUpdate = alias + updateScore;
-
-  // new score to display
+  
   const scoreToDisplay = eval('newGame.' + alias + '.' + updateScore.toLowerCase());  
   
-  // display score
   document.getElementById(divToUpdate).innerText = scoreToDisplay;      
 })
 
+// Display winner
 document.addEventListener('winnerEvent', () => {
   console.log(`le gagnant est ${newGame.player().name}`);
   disableButtons([rollDiceButton, holdbutton]);
@@ -44,15 +45,18 @@ document.addEventListener('winnerEvent', () => {
   newGame.status = 'outOfGame';
 })
 
+// Display active player
 document.addEventListener('turnEvent', (event) => {  
   displayActivePlayer(event);
 })
 
+// Add dice score after the end of dice animation
 document.addEventListener('endAnimation', (event) => {
   console.log('event : ' + event.detail.target)
   newGame.play(event.detail.target);
 })
 
+// Add a green things to show the active player and remove for inactive player
 function displayActivePlayer(event){
   const id = event.detail.alias + 'RoundBackground';
   const idPlayer = event.detail.alias + 'Name';
@@ -67,6 +71,7 @@ function displayActivePlayer(event){
   }
 }
 
+// choose the first player with a randomizer
 function randomFirstPlayer(newGame){
   let random = Math.floor(Math.random()*2);
   if(random == 0){
@@ -77,8 +82,7 @@ function randomFirstPlayer(newGame){
   }
 }
 
-
-
+// roll the dice only if the Game.status is inGame
 rollDiceButton.addEventListener('click', () => {
   if(newGame.status !== 'inGame'){
     console.log('pas de partie en cours...')
@@ -88,7 +92,7 @@ rollDiceButton.addEventListener('click', () => {
   }
 })
 
-
+// hold the score, the button is active only if hold > 0 and Game.status is inGame
 holdbutton.addEventListener('click', () => {  
   console.log(typeof newGame);
   if(newGame.status !== 'inGame' || newGame.player().round <= 0){
@@ -99,8 +103,8 @@ holdbutton.addEventListener('click', () => {
   }
 })
 
-// Bloquer les boutons
-// désactiver des boutons via Css
+
+// Disactivate buttons by CSS attributes
 function disableButtons(arrayElements){
   arrayElements.forEach(element => {
     element.setAttribute('disabled', true);
@@ -111,7 +115,3 @@ function activateButtons(arrayElements){
     element.removeAttribute('disabled')
   });
 }
-// disableButtons([rollDiceButton, holdbutton]);
-
-// essai de promises ----------------------------------------
-
