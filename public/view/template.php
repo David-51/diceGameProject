@@ -23,6 +23,7 @@
     </div>
     <?php require './public/view/formModal.php'; ?>
     <?php require './public/view/winnerModal.php'; ?>
+    <script type="module" src="./public/js/diceAnim.js"></script>
     <script src="./public/js/bootstrap.min.js"></script>
     <script src="./public/js/script.js"></script>
 </body>

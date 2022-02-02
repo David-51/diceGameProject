@@ -8,9 +8,7 @@ ob_start();
     
 </div>
 <div class="row d-flex justify-content-center my-1">
-    <div class="result">
-        Résultat du lancé
-    </div>
+    <canvas id="dice"></canvas>
 </div>
 <div class="row d-flex justify-content-center my-1">
     <button id="rollDice" class="btn btn-outline-success text-dark fs-4" type="button" disabled>

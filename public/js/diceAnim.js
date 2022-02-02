@@ -1,36 +1,35 @@
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.min.js';
 
-// window.addEventListener('load', ()=>{
 const scene = new THREE.Scene();
-scene.color = 0xFFFFFF;
+const canvasElement = document.getElementById('dice');
 
-const camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight , 0.1, 1000);
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight)
+const camera = new THREE.PerspectiveCamera(80, canvasElement.clientWidth / canvasElement.clientHeight , 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({
+    canvas: canvasElement
+});
 
 renderer.setClearColor(0x0e004b);
 
-document.body.appendChild(renderer.domElement)    
-
-// dé
-const diceGeometry = new THREE.BoxGeometry(2,2,2);
+const diceGeometry = new THREE.BoxGeometry(5,5,5);
 
 const materials = [
-    new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('images/face1.png')}), // RIGHT side
-    new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('images/face6.png')}), // LEFT side
-    new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('images/face2.png')}), // TOP side
-    new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('images/face5.png')}), // BOTTOM side
-    new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('images/face3.png')}), // FRONT Side
-    new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('images/face4.png')}), // BACK side
+    new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('public/images/face1.png')}), // RIGHT side
+    new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('public/images/face6.png')}), // LEFT side
+    new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('public/images/face2.png')}), // TOP side
+    new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('public/images/face5.png')}), // BOTTOM side
+    new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('public/images/face3.png')}), // FRONT Side
+    new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('public/images/face4.png')}), // BACK side
 ]
 
 const dice = new THREE.Mesh(diceGeometry, materials);
 
-camera.position.set(3,6,4)
+camera.position.set(3,7,5)
 camera.lookAt(0,0,0)
 
 scene.add(dice);
-
+window.addEventListener('load', ()=>{
+    renderer.render(scene, camera);    
+})
 /**
  * 
  * @param {string} diceNumber 
@@ -98,33 +97,27 @@ function randomTarget(){
     return stringTarget[target];
 }
 
-window.addEventListener('load', ()=>{
+function diceAnimation(){
+    dice.rotation.x = 0;
+    dice.rotation.z = 0;
     
-    renderer.render(scene, camera);
+    let targetRotation = randomTarget();
+    console.log(targetRotation);
     
-    document.getElementsByTagName('body')[0].addEventListener('click', ()=>{
-        dice.rotation.x = 0;
-        dice.rotation.z = 0;
+    function animate(){        
+        const animationFrame = requestAnimationFrame(animate);                                        
+        const rotation = diceRotation(targetRotation, dice, 1, animationFrame);     
     
-        let targetRotation = randomTarget();
-        console.log(targetRotation);
-    
-        function animate(){        
-            const animationFrame = requestAnimationFrame(animate);                                        
-            const rotation = diceRotation(targetRotation, dice, 1, animationFrame);     
-    
-            if(rotation === false){
-                cancelAnimationFrame(animationFrame);
-                console.log(`
-                    x : ${dice.rotation.x}
-                    z : ${dice.rotation.z}`)
-            }
-            renderer.render(scene, camera);
-            return {x: dice.rotation.x, z: dice.rotation.z}       
+        if(rotation === false){
+            cancelAnimationFrame(animationFrame);            
+            return 'endAnim';
         }
-        animate();
-    })
+        renderer.render(scene, camera);        
+    }
+    animate();
+}
+
+
+document.getElementsByTagName('body')[0].addEventListener('click', ()=>{
+    diceAnimation();
 })
-
-
-// })
