@@ -7,7 +7,7 @@ ob_start();
     </p>
 </div>
 <div class="col-12 border border-secondary d-flex justify-content-center">
-    <p id="<?= $player ?>Global" class="score">
+    <p id="<?= $player ?>Global" class="score text-danger">
         <?= random_int(0, 100); ?>
     </p>
 </div>
