@@ -36,8 +36,7 @@ document.addEventListener('scoreEvent', (event)=> {
 })
 
 // Display winner
-document.addEventListener('winnerEvent', () => {
-  console.log(`le gagnant est ${newGame.player().name}`);
+document.addEventListener('winnerEvent', () => {  
   disableButtons([rollDiceButton, holdbutton]);
   
   document.getElementById('congratulation').innerText = `Félicitations ${newGame.player().name}, vous avez gagné !`;
@@ -51,8 +50,7 @@ document.addEventListener('turnEvent', (event) => {
 })
 
 // Add dice score after the end of dice animation
-document.addEventListener('endAnimation', (event) => {
-  console.log('event : ' + event.detail.target)
+document.addEventListener('endAnimation', (event) => {  
   newGame.play(event.detail.target);
 })
 
@@ -85,7 +83,6 @@ let randomFirstPlayer = (newGame) => {
 // roll the dice only if the Game.status is inGame
 rollDiceButton.addEventListener('click', () => {
   if(newGame.status !== 'inGame'){
-    console.log('pas de partie en cours...')
   }
   else{
     newGame.dice.play();
@@ -94,9 +91,7 @@ rollDiceButton.addEventListener('click', () => {
 
 // hold the score, the button is active only if hold > 0 and Game.status is inGame
 holdbutton.addEventListener('click', () => {  
-  console.log(typeof newGame);
   if(newGame.status !== 'inGame' || newGame.player().round <= 0){
-    console.log('rien a hold')
   }
   else{
     newGame.hold();

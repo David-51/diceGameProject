@@ -122,8 +122,7 @@ export class Dice{
             const targetRotation = this.diceRotation(this.target, 1);          
             this.renderer.render(this.scene, this.camera);                        
             
-            if(targetRotation === this.target.number){                     
-                console.log('dans le if : ' + targetRotation)            
+            if(targetRotation === this.target.number){                                           
                 cancelAnimationFrame(this.animationFrame); 
                 this.endAnimation();                                                                 
             }                                                                                

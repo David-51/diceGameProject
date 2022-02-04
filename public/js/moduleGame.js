@@ -40,8 +40,7 @@ export class Game{
         this.player().resetRound();      
         this.switchPlayer();
       }
-      else{
-        console.log(diceRoll);
+      else{        
         this.player().addToRound(diceRoll);
       }
     }
@@ -63,8 +62,7 @@ export class Game{
       }
     }
     switchPlayer(){
-      if(this.playerOne.turn === true){
-        console.log('this.playerOne.turn = ', this.playerOne.turn);
+      if(this.playerOne.turn === true){        
         this.playerOne.setIsNotTurn();
         this.playerTwo.resetRound();
         this.playerTwo.setIsTurn();
