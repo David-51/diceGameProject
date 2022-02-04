@@ -33,20 +33,22 @@ export class Dice{
         this.camera;
         this.renderer;
         this.dice;
-        this.target;
-        this.endAnimationEvent = new CustomEvent('diceAnimation', {
-            detail: {                            
-              status: 'endAnimation',              
-            }
-        })        
-        this.startAnimationEvent = new CustomEvent('diceAnimation', {
-            detail: {                            
-              status: 'startAnimation',              
-            }
-        })        
+        this.target;        
+        this.animationEvent = {
+            end: new CustomEvent('diceAnimation', {
+                detail: {                            
+                  status: 'endAnimation',              
+                }
+            }),
+            start: new CustomEvent('diceAnimation', {
+                detail: {                            
+                  status: 'startAnimation',              
+                }
+            })
+        }
+                
     }
         
-
     createDice(){
         this.camera = new THREE.PerspectiveCamera(80, this.canvasElement.clientWidth / this.canvasElement.clientHeight , 0.1, 1000);
         this.renderer = new THREE.WebGLRenderer({
@@ -118,7 +120,7 @@ export class Dice{
         this.dice.rotation.x = 0;
         this.dice.rotation.z = 0;
         this.target = this.randomTarget(); 
-        document.dispatchEvent(this.startAnimationEvent);
+        this.startAnimation();
         this.createAnimation();                                     
         
     }
@@ -134,10 +136,10 @@ export class Dice{
             }                                                                                
     }
     endAnimation(){        
-        this.endAnimationEvent.detail.target = this.target.number;
-        document.dispatchEvent(this.endAnimationEvent);
+        this.animationEvent.end.detail.target = this.target.number;
+        document.dispatchEvent(this.animationEvent.end);
     }
     startAnimation(){                
-        document.dispatchEvent(this.startAnimationEvent);
+        document.dispatchEvent(this.animationEvent.start);
     }
 }
