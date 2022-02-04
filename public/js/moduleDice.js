@@ -34,9 +34,14 @@ export class Dice{
         this.renderer;
         this.dice;
         this.target;
-        this.endAnimationEvent = new CustomEvent('endAnimation', {
+        this.endAnimationEvent = new CustomEvent('diceAnimation', {
             detail: {                            
-              name: 'endAnimation',              
+              status: 'endAnimation',              
+            }
+        })        
+        this.startAnimationEvent = new CustomEvent('diceAnimation', {
+            detail: {                            
+              status: 'startAnimation',              
             }
         })        
     }
@@ -113,6 +118,7 @@ export class Dice{
         this.dice.rotation.x = 0;
         this.dice.rotation.z = 0;
         this.target = this.randomTarget(); 
+        document.dispatchEvent(this.startAnimationEvent);
         this.createAnimation();                                     
         
     }
@@ -130,5 +136,8 @@ export class Dice{
     endAnimation(){        
         this.endAnimationEvent.detail.target = this.target.number;
         document.dispatchEvent(this.endAnimationEvent);
+    }
+    startAnimation(){                
+        document.dispatchEvent(this.startAnimationEvent);
     }
 }

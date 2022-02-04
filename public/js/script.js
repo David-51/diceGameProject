@@ -50,8 +50,16 @@ document.addEventListener('turnEvent', (event) => {
 })
 
 // Add dice score after the end of dice animation
-document.addEventListener('endAnimation', (event) => {  
-  newGame.play(event.detail.target);
+document.addEventListener('diceAnimation', (event) => {
+  console.log(event.detail.status)
+  if(event.detail.status === "startAnimation"){
+    disableButtons([rollDiceButton, holdbutton]);
+    // désactiver les boutons ...
+  }
+  else if (event.detail.status === "endAnimation"){
+    activateButtons([rollDiceButton, holdbutton]);
+    newGame.play(event.detail.target);
+  }
 })
 
 // Add a green things to show the active player and remove for inactive player
