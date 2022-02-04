@@ -44,7 +44,7 @@ export class Player{
     }
     Start(){
       this.setIsTurn();
-      this.initRound();
+      this.resetRound();
     }
     setIsTurn(){
       this.turn = true;
@@ -58,11 +58,11 @@ export class Player{
     initPlayer(){    
       this.global = 0;    
       this.setIsNotTurn();
-      this.initRound();    
+      this.resetRound();    
       document.dispatchEvent(this.globalScoreEvent);
     }
     
-    initRound(){    
+    resetRound(){    
       this.round = 0;    
       document.dispatchEvent(this.roundScoreEvent);
     }

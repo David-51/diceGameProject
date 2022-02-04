@@ -36,7 +36,8 @@ export class Game{
     }
   
     play(diceRoll){        
-      if(diceRoll === 1){      
+      if(diceRoll === 1){
+        this.player().resetRound();      
         this.switchPlayer();
       }
       else{
@@ -65,11 +66,11 @@ export class Game{
       if(this.playerOne.turn === true){
         console.log('this.playerOne.turn = ', this.playerOne.turn);
         this.playerOne.setIsNotTurn();
-        this.playerTwo.initRound();
+        this.playerTwo.resetRound();
         this.playerTwo.setIsTurn();
       }
       else{
-        this.playerOne.initRound();
+        this.playerOne.resetRound();
         this.playerOne.setIsTurn();
         this.playerTwo.setIsNotTurn();
       }
@@ -80,6 +81,7 @@ export class Game{
         document.dispatchEvent(this.winnerAlert);
         return 
       }
+      this.player().resetRound();
       this.switchPlayer();
     }
   }
