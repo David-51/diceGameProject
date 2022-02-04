@@ -57,7 +57,7 @@ document.addEventListener('endAnimation', (event) => {
 })
 
 // Add a green things to show the active player and remove for inactive player
-function displayActivePlayer(event){
+let displayActivePlayer = (event) => {
   const id = event.detail.alias + 'RoundBackground';
   const idPlayer = event.detail.alias + 'Name';
   if(event.detail.name === 'isTurn'){
@@ -72,7 +72,7 @@ function displayActivePlayer(event){
 }
 
 // choose the first player with a randomizer
-function randomFirstPlayer(newGame){
+let randomFirstPlayer = (newGame) => {
   let random = Math.floor(Math.random()*2);
   if(random == 0){
     newGame.playerOne.Start();
@@ -105,12 +105,13 @@ holdbutton.addEventListener('click', () => {
 
 
 // Disactivate buttons by CSS attributes
-function disableButtons(arrayElements){
+let disableButtons = (arrayElements) => {
   arrayElements.forEach(element => {
     element.setAttribute('disabled', true);
   });
 }
-function activateButtons(arrayElements){
+
+let activateButtons = (arrayElements) => {
   arrayElements.forEach(element => {
     element.removeAttribute('disabled')
   });

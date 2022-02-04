@@ -29,13 +29,3 @@ body {
     font-weight: 900;
     margin-left: 0.5em;
 }
-
-#newGameButton::before{
-    color: red;
-    content: "\F4FA";
-    display: inline-block;
-    padding-right: 3px;
-    vertical-align: middle;
-    font-weight: 900;
-    margin-left: 0.5em;
-}

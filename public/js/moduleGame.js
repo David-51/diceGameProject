@@ -1,5 +1,4 @@
 import { Dice } from './moduleDice.js';
-// import * as PLAYER from './modulePlayer.js';
 import { Player } from './modulePlayer.js';
 
 export class Game{

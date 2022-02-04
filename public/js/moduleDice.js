@@ -109,15 +109,12 @@ export class Dice{
             return randomTarget.number;
         }
     }
-    play(){
-        // return new Promise(resolve  => {
-            this.dice.rotation.x = 0;
-            this.dice.rotation.z = 0;
-            this.target = this.randomTarget(); 
-            // resolve(this.createAnimation());  
-            this.createAnimation();                                     
-            // return new Promise(resolve => this.createAnimation)
-        // })                  
+    play(){    
+        this.dice.rotation.x = 0;
+        this.dice.rotation.z = 0;
+        this.target = this.randomTarget(); 
+        this.createAnimation();                                     
+        
     }
 
     createAnimation(){                            
