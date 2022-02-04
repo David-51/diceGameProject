@@ -50,17 +50,17 @@ document.addEventListener('turnEvent', (event) => {
 })
 
 // Add dice score after the end of dice animation
-document.addEventListener('diceAnimation', (event) => {
-  console.log(event.detail.status)
-  if(event.detail.status === "startAnimation"){
-    disableButtons([rollDiceButton, holdbutton]);
-    // désactiver les boutons ...
-  }
-  else if (event.detail.status === "endAnimation"){
-    activateButtons([rollDiceButton, holdbutton]);
-    newGame.play(event.detail.target);
-  }
-})
+let statusAnimation = document.addEventListener('diceAnimation', (event) => {    
+    if(event.detail.status === "startAnimation"){
+      disableButtons([rollDiceButton, holdbutton]);
+      return 'disabled';
+    }
+    else if (event.detail.status === "endAnimation"){
+      activateButtons([rollDiceButton, holdbutton]);
+      newGame.play(event.detail.target);
+      return 'enabled';
+    }
+  })
 
 // Add a green things to show the active player and remove for inactive player
 let displayActivePlayer = (event) => {
@@ -91,16 +91,15 @@ let randomFirstPlayer = (newGame) => {
 // roll the dice only if the Game.status is inGame
 
   rollDiceButton.addEventListener('click', () => {    
-    if(newGame.status === 'inGame'){
-      newGame.dice.play();
+    if(newGame.status === 'inGame' && statusAnimation !== "disabled"){
+      newGame.dice.play(); 
     }    
   })
-
 
 // hold the score, the button is active only if hold > 0 and Game.status is inGame
 
   holdbutton.addEventListener('click', () => {  
-    if(newGame.status === 'inGame' || newGame.player().round > 0){
+    if(newGame.status === 'inGame' && newGame.player().round > 0 && statusAnimation !== 'disabled'){
       newGame.hold();
     }
   })  
