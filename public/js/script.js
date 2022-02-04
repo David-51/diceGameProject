@@ -50,15 +50,16 @@ document.addEventListener('turnEvent', (event) => {
 })
 
 // Add dice score after the end of dice animation
-let statusAnimation = document.addEventListener('diceAnimation', (event) => {    
+let statusAnimation;
+document.addEventListener('diceAnimation', (event) => {    
     if(event.detail.status === "startAnimation"){
       disableButtons([rollDiceButton, holdbutton]);
-      return 'disabled';
+      statusAnimation = 'disabled';
     }
     else if (event.detail.status === "endAnimation"){
       activateButtons([rollDiceButton, holdbutton]);
       newGame.play(event.detail.target);
-      return 'enabled';
+      statusAnimation = 'enabled';
     }
   })
 
@@ -92,6 +93,7 @@ let randomFirstPlayer = (newGame) => {
 
   rollDiceButton.addEventListener('click', () => {    
     if(newGame.status === 'inGame' && statusAnimation !== "disabled"){
+      console.log(statusAnimation);
       newGame.dice.play(); 
     }    
   })
@@ -100,6 +102,7 @@ let randomFirstPlayer = (newGame) => {
 
   holdbutton.addEventListener('click', () => {  
     if(newGame.status === 'inGame' && newGame.player().round > 0 && statusAnimation !== 'disabled'){
+      console.log(statusAnimation)
       newGame.hold();
     }
   })  
