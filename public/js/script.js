@@ -92,8 +92,7 @@ let randomFirstPlayer = (newGame) => {
 // roll the dice only if the Game.status is inGame
 
   rollDiceButton.addEventListener('click', () => {    
-    if(newGame.status === 'inGame' && statusAnimation !== "disabled"){
-      console.log(statusAnimation);
+    if(newGame.status === 'inGame' && statusAnimation !== "disabled"){      
       newGame.dice.play(); 
     }    
   })
@@ -101,8 +100,7 @@ let randomFirstPlayer = (newGame) => {
 // hold the score, the button is active only if hold > 0 and Game.status is inGame
 
   holdbutton.addEventListener('click', () => {  
-    if(newGame.status === 'inGame' && newGame.player().round > 0 && statusAnimation !== 'disabled'){
-      console.log(statusAnimation)
+    if(newGame.status === 'inGame' && newGame.player().round > 0 && statusAnimation !== 'disabled'){      
       newGame.hold();
     }
   })  
