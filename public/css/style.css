@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,300&display=swap');
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css");
 
 body {
@@ -12,7 +12,7 @@ body {
 }
 
 .score {
-    font-size: 7em;
+    font-size: 2rem;
 }
 
 .active {
@@ -27,5 +27,41 @@ body {
     padding-right: 3px;
     vertical-align: middle;
     font-weight: 900;
-    margin-left: 0.5em;
+    margin-left: 0.5rem;
+}
+
+.players {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.controls {
+    font-size: 1rem;
+}
+
+.current {
+    font-size: 1rem;
+}
+.holdScore {
+    font-size: 1rem;
+}
+
+@media screen and (min-width:992px) {
+    .score {
+        font-size: 3.6rem;
+    }
+    .players {
+        font-size: 2rem;        
+    }
+    
+    .controls {
+        font-size: 2rem;
+    }
+    .current {
+        font-size: 1.5rem;
+    }
+    .holdScore {
+        font-size: 2rem;
+    }
+
 }
