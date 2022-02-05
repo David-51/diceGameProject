@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,15 +12,17 @@
     <title>Jeu de dé</title>
 </head>
 <body class="bg-secondary d-flex justify-content-center vh-100">
-    <div class="container row row-cols-3 bg-light my-0 my-lg-4 justify-content-evenly">
-        <div class="row col-12 col-lg border border-warning justify-content-center order-2 order-lg-1 mx-0 my-1 my-lg-4">
-            <?= $playerOne ?>
-        </div>
-        <div class="row col-12 col-lg border border-primary mx-0 my-1 my-1 my-lg-4 justify-content-center order-1 order-lg-2 controls">
-            <?= $controls ?>            
-        </div> 
-        <div class="row col-12 col-lg border border-warning justify-content-center order-3 order-lg-3 mx-0 my-1 my-lg-4">
-            <?= $playerTwo ?>
+    <div class="container row bg-light my-0 my-lg-4 mx-0 px-1">
+        <div class="row col mx-0 px-0 mx-lg-4 justify-content-center">
+            <div class="row col-12 col-lg justify-content-center order-2 order-lg-1 mx-0 my-1 my-lg-4 px-4">
+                <?= $playerOne ?>
+            </div>
+            <div class="row col-12 col-lg justify-content-center order-1 order-lg-2 mx-0 my-1 my-lg-4 controls border">
+                <?= $controls ?>            
+            </div> 
+            <div class="row col-12 col-lg justify-content-center order-3 order-lg-3 mx-0 my-1 my-lg-4 px-4">
+                <?= $playerTwo ?>
+            </div>
         </div>
     </div>
     <?php require './public/view/formModal.php'; ?>

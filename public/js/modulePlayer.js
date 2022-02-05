@@ -1,6 +1,6 @@
 export class Player{
     constructor(alias, name){
-      this.name = name;     
+      this.name = name.toUpperCase();     
       this.round = 0; // current round score
       this.global = 0; // global score        
       this.turn = false; // target the player who does play 
