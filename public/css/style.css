@@ -48,7 +48,7 @@ body {
     font-size: 1rem;
 }
 .player {
-    border: 1px solid black;
+    border: 1px solid rgb(169, 169, 255);
 }
 
 @media screen and (min-width:992px) {

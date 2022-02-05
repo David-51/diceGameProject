@@ -1,7 +1,7 @@
 <?php
 ob_start();
 ?>
-<div class="row border border-primary justify-content-center player">
+<div class="row justify-content-center player">
     <div class="align-self-end players">
         <p id="<?= $player ?>Name" class="playerName text-center my-1">
             <?= $player ?>
