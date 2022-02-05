@@ -52,10 +52,11 @@ export class Dice{
     createDice(){
         this.camera = new THREE.PerspectiveCamera(80, this.canvasElement.clientWidth / this.canvasElement.clientHeight , 0.1, 1000);
         this.renderer = new THREE.WebGLRenderer({
-            canvas: this.canvasElement
+            canvas: this.canvasElement,
+            alpha: true
         });
 
-        this.renderer.setClearColor(0x0e004b);
+        this.renderer.setClearColor(0xFFFFFF,0);
 
         const diceGeometry = new THREE.BoxGeometry(5,5,5);
 

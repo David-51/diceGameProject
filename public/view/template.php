@@ -17,7 +17,7 @@
             <div class="row col-12 col-lg justify-content-center order-2 order-lg-1 mx-0 my-1 my-lg-4 px-4">
                 <?= $playerOne ?>
             </div>
-            <div class="row col-12 col-lg justify-content-center order-1 order-lg-2 mx-0 my-1 my-lg-4 controls border">
+            <div class="row col-12 col-lg justify-content-center order-1 order-lg-2 mx-0 my-1 my-lg-4 px-lg-0 controls">
                 <?= $controls ?>            
             </div> 
             <div class="row col-12 col-lg justify-content-center order-3 order-lg-3 mx-0 my-1 my-lg-4 px-4">
