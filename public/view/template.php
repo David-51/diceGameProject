@@ -11,15 +11,15 @@
     <link rel="stylesheet" href="./public/css/style.css">
     <title>Jeu de dé</title>
 </head>
-<body class="bg-secondary d-flex justify-content-center">
-    <div class="container row bg-light my-4 d-flex justify-content-evenly">
-        <div class="row col-12 col-lg-4 border border-warning mx-0 my-4 d-flex justify-content-center blockPlayer">    
+<body class="bg-secondary d-flex justify-content-center vh-100">
+    <div class="container row row-cols-3 bg-light my-4 justify-content-evenly">
+        <div class="row col-12 col-lg border border-warning mx-0 my-4 d-flex justify-content-center order-2 order-lg-1">
             <?= $playerOne ?>
         </div>
-        <div class="row col-12 col-lg-4 border border-primary mx-0 my-4 d-flex justify-content-center">
+        <div class="row col-12 col-lg border border-primary mx-0 my-4 d-flex justify-content-center order-1 order-lg-2">
             <?= $controls ?>            
         </div> 
-        <div class="row col-12 col-lg-4 border border-warning mx-0 my-4 d-flex justify-content-center blockPlayer">
+        <div class="row col-12 col-lg border border-warning mx-0 my-4 d-flex justify-content-center order-3 order-lg-3">
             <?= $playerTwo ?>
         </div>
     </div>
