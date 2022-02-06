@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./public/css/style.css">
     <title>Jeu de dé</title>
 </head>
-<body class="bg-secondary d-flex justify-content-center vh-100">
+<body class="d-flex justify-content-center vh-100">
     <div class="container row bg-light my-0 my-lg-4 mx-0 px-1">
         <div class="row col mx-0 px-0 mx-lg-4 justify-content-center">
             <div class="row col-12 col-lg justify-content-center order-2 order-lg-1 mx-0 my-1 my-lg-4 px-4">

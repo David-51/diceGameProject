@@ -49,7 +49,8 @@ export class Dice{
                 
     }
         
-    createDice(){
+    createDice(){        
+
         this.camera = new THREE.PerspectiveCamera(80, this.canvasElement.clientWidth / this.canvasElement.clientHeight , 0.1, 1000);
         this.renderer = new THREE.WebGLRenderer({
             canvas: this.canvasElement,
@@ -58,7 +59,7 @@ export class Dice{
 
         this.renderer.setClearColor(0xFFFFFF,0);
 
-        const diceGeometry = new THREE.BoxGeometry(5,5,5);
+        const diceGeometry = new THREE.BoxGeometry(4,4,4);
 
         const materials = [
             new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('public/images/face1.png')}), // RIGHT side
@@ -71,7 +72,7 @@ export class Dice{
 
         this.dice = new THREE.Mesh(diceGeometry, materials);
 
-        this.camera.position.set(3,7,5)
+        this.camera.position.set(2,5,3)
         this.camera.lookAt(0,0,0)
 
         this.scene.add(this.dice);

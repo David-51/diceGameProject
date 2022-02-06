@@ -15,7 +15,7 @@ ob_start();
     <div class="row col-4 col-lg-8 align-self-start px-0 px-lg-1">
         <div class="col bg-round text-center" id="<?= $player ?>RoundBackground">
             <p class="current mb-0"> 
-                Current
+                CURRENT
             </p>
             <p id="<?= $player ?>Round" class="text-light my-1 holdScore">
                 <?= random_int(0, 30); ?>            
