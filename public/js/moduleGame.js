@@ -43,16 +43,7 @@ export class Game{
       else{        
         this.player().addToRound(diceRoll);
       }
-    }
-    // Display Winner
-    winner(){
-      if(this.playerOne.global >= 100){
-        return this.playerOne.winner = true;
-      }
-      if(this.playerTwo.global >= 100){
-        return this.playerTwo.winner = true;
-      }
-    }  
+    }     
     player(){    
       if(this.playerOne.turn === true){
         return this.playerOne;
@@ -75,7 +66,7 @@ export class Game{
     }
     hold(){
       this.player().addRoundToGlobal();
-      if(this.player().global >= 15){
+      if(this.player().global >= 100){
         document.dispatchEvent(this.winnerAlert);
         return 
       }
