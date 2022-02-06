@@ -74,10 +74,10 @@ body {
     border: none;
 }
 
+/* resoud le problème des navigateurs mobiles  */
 @media screen and (pointer: coarse){
     body {
-        padding-bottom: 80px;
-        color:red;
+        padding-bottom: 80px;        
     }
 }
 
@@ -100,24 +100,18 @@ body {
         --marge: calc((100vw - var(--container))/2);
         transform: translate(calc(var(--marge) + var(--container) - 10px - 3rem ));        
     }
-    /* body {
-        padding-bottom: 80px;
-    } */
 }
 @media screen and (min-width:768px){
     #dice {
-        height:300px;
-        width:300px;
+        height:200px;
+        width:200px;
     }
     #rulesModalButton {      
         top:30px;          
         --container: 720px;
         --marge: calc((100vw - var(--container))/2);
         transform: translate(calc(var(--marge) + var(--container) - 10px - 3rem ));        
-    }
-    /* body {
-        padding-bottom: 80px;
-    } */
+    }    
 }
 
 @media screen and (min-width:992px) {    
