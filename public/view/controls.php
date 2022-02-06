@@ -3,7 +3,7 @@ ob_start();
 ?>
 <div class="d-flex flex-column">
     <div class="justify-content-center px-lg-0">
-        <button id="newGamebutton" class="btn btn-outline-success controls mb-1 col-12 btn-noborder" data-bs-toggle="modal" data-bs-target="#formModal" type="button"> <!-- class player -->
+        <button id="newGamebutton" class="btn controls mb-1 col-12 btn-noborder" data-bs-toggle="modal" data-bs-target="#formModal" type="button"> <!-- class player -->
                 <i class="bi bi-plus-circle text-danger"></i>&ensp;NEW GAME
         </button>
     </div>
@@ -11,11 +11,11 @@ ob_start();
         <canvas id="dice" class="align-self-center"></canvas>
     </div>
     <div class="px-lg-0">
-        <button id="rollDice" class="btn btn-outline-success controls my-1 col-12 btn-noborder" type="button" disabled>
+        <button id="rollDice" class="btn controls my-1 col-12 btn-noborder" type="button" disabled>
             <i class="bi bi-arrow-repeat text-danger"></i>&ensp;
             ROLL DICE
         </button>
-        <button class="btn btn-outline-success controls col-12 btn-noborder" type="button " id="hold" disabled>        
+        <button class="btn controls col-12 btn-noborder" type="button " id="hold" disabled>        
             <i class="bi bi-box-arrow-in-down text-danger"></i>&ensp;HOLD
         </button>
     </div>

@@ -12,7 +12,10 @@
     <title>Jeu de dé</title>
 </head>
 <body class="d-flex justify-content-center vh-100">
-    <div class="container row bg-light my-0 my-lg-4 mx-0 px-0 custom-bg">
+    <div class="container row bg-light my-0 my-md-4 mx-0 px-0">
+        <button type="button" class="" data-bs-toggle="modal" data-bs-target="#rulesModal" id="rulesModalButton">
+            <i class="fas fa-info-circle"></i>
+        </button>
         <div class="row col mx-0 px-0 mx-lg-4 justify-content-center">
             <div class="row col-12 col-lg justify-content-center order-2 order-lg-1 mx-0 my-1 my-lg-4 px-4">
                 <?= $playerOne ?>
@@ -27,6 +30,7 @@
     </div>
     <?php require './public/view/formModal.php'; ?>
     <?php require './public/view/winnerModal.php'; ?>    
+    <?php require './public/view/rulesModal.php'; ?>    
     <script src="./public/js/bootstrap.min.js"></script>
     <script type="module" src="./public/js/script.js"></script>
 </body>

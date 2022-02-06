@@ -13,6 +13,23 @@ body {
     height:200px;
     width:200px;
 }
+
+#rulesModalButton {
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    width:3rem;
+    height:3rem;
+    padding: 0;
+    margin:0;
+    display: block;              
+    border: none;       
+    color: rgba(0, 119, 255, 0.568);
+    background-color: #FFFFFF00;
+    font-size: 2rem;
+    /* transform: translate(calc(100vw - 3rem)); */
+}
+
 .bg-round {
     background-color: #E54F48;
 }
@@ -59,7 +76,30 @@ body {
     border: none;
 }
 
-@media screen and (min-width:992px) {
+@media screen and (max-width:576px){
+    #rulesModalButton {
+        --container: 100vw;                       
+        --marge: calc((100vw - var(--container))/2);        
+        transform: translate(calc(var(--marge) + var(--container) - 10px - 3rem ));        
+    }
+}
+@media screen and (min-width:576px){
+    #rulesModalButton {     
+        --container: 540px;                       
+        --marge: calc((100vw - var(--container))/2);
+        transform: translate(calc(var(--marge) + var(--container) - 10px - 3rem ));        
+    }
+}
+@media screen and (min-width:768px){
+    #rulesModalButton {      
+        top:30px;          
+        --container: 720px;
+        --marge: calc((100vw - var(--container))/2);
+        transform: translate(calc(var(--marge) + var(--container) - 10px - 3rem ));        
+    }
+}
+
+@media screen and (min-width:992px) {    
     .custom-bg{
         background: linear-gradient(to right, #c4c4c420, #c4c4c420 50%, #FFFFFF 50%, #FFFFFF 100%);
         box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.541);
@@ -86,5 +126,28 @@ body {
     #dice {
         height:300px;
         width:300px;
+    }
+    #rulesModalButton {
+        top:40px;           
+        --container: 960px;
+        --marge: calc((100vw - var(--container))/2);
+        transform: translate(calc(var(--marge) + var(--container) - 10px - 3rem ));        
+    }
+}
+
+@media screen and (min-width:1200px){
+    #rulesModalButton {        
+        top:40px;        
+        --container: 1140px;
+        --marge: calc((100vw - var(--container))/2);
+        transform: translate(calc(var(--marge) + var(--container) - 10px - 3rem ));        
+    }
+}
+@media screen and (min-width:1400px){
+    #rulesModalButton {    
+        top:40px;            
+        --container: 1320px;
+        --marge: calc((100vw - var(--container))/2);
+        transform: translate(calc(var(--marge) + var(--container) - 10px - 3rem ));        
     }
 }
