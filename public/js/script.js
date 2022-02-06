@@ -69,8 +69,7 @@ form.addEventListener('submit', (event)=>{
 document.addEventListener('scoreEvent', (event)=> {
   const alias = event.detail.alias;
   const updateScore = event.detail.name;
-  const divToUpdate = alias + updateScore;
-  
+  const divToUpdate = alias + updateScore;  
   const scoreToDisplay = eval('newGame.' + alias + '.' + updateScore.toLowerCase());  
   
   document.getElementById(divToUpdate).innerText = scoreToDisplay;      
@@ -78,7 +77,7 @@ document.addEventListener('scoreEvent', (event)=> {
 
 // Display winner
 document.addEventListener('winnerEvent', () => {  
-  disableButtons([rollDiceButton, holdbutton]);
+  disableButtons([rollDiceButton, holdbutton]);  
   
   document.getElementById('congratulation').innerText = `Félicitations ${newGame.player().name}, vous avez gagné !`;
   winnerModal.show();
@@ -91,25 +90,19 @@ document.addEventListener('turnEvent', (event) => {
 })
 
 // Add dice score after the end of dice animation
-
 document.addEventListener('diceAnimation', (event) => {    
-    if(event.detail.status === "startAnimation"){
-      disableButtons([rollDiceButton, holdbutton]);
-      statusAnimation = 'disabled';
-    }
-    else if (event.detail.status === "endAnimation"){
-      activateButtons([rollDiceButton, holdbutton]);
-      newGame.play(event.detail.target);
-      statusAnimation = 'enabled';
-    }
-  })
-
-
-
-
+  if(event.detail.status === "startAnimation"){
+    disableButtons([rollDiceButton, holdbutton]);
+    statusAnimation = 'disabled';
+  }
+  else if (event.detail.status === "endAnimation"){
+    activateButtons([rollDiceButton, holdbutton]);
+    newGame.play(event.detail.target);
+    statusAnimation = 'enabled';
+  }
+})
 
 // roll the dice only if the Game.status is inGame
-
 rollDiceButton.addEventListener('click', () => {    
   if(newGame.status === 'inGame' && statusAnimation !== "disabled"){      
     newGame.dice.play(); 
@@ -117,7 +110,6 @@ rollDiceButton.addEventListener('click', () => {
 })
 
 // hold the score, the button is active only if hold > 0 and Game.status is inGame
-
 holdbutton.addEventListener('click', () => {  
   if(newGame.status === 'inGame' && newGame.player().round > 0 && statusAnimation !== 'disabled'){      
     newGame.hold();
