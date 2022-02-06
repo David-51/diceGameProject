@@ -5,12 +5,16 @@ body {
     margin: 0;
     padding: 0;    
     font-family: 'Lato', sans-serif;
-    font-weight: 100;
-    background-color: blue;
-}
+    font-weight: 100;    
+    background: linear-gradient(-45deg, #8b582e, #8b582e90)    
 
+}
+#dice {
+    height:200px;
+    width:200px;
+}
 .bg-round {
-    background-color: brown;
+    background-color: #E54F48;
 }
 
 .score {
@@ -56,6 +60,10 @@ body {
 }
 
 @media screen and (min-width:992px) {
+    .custom-bg{
+        background: linear-gradient(to right, #c4c4c420, #c4c4c420 50%, #FFFFFF 50%, #FFFFFF 100%);
+        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.541);
+    }
     .score {
         font-size: 6rem;
     }
