@@ -9,6 +9,9 @@ body {
     background: linear-gradient(-45deg, #8b582e, #8b582e90)    
 
 }
+.container {
+    overflow: scroll;
+}
 #dice {
     height: 100px;
     width: 200px;
